@@ -14,21 +14,17 @@
             <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
 
-        <DataGrid Grid.Row="0" x:Name="DataGridPartners" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Grid.Row="0" x:Name="DataGridSales" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Организация" Width="*" Binding="{Binding Partner_type.Type}"/>
-                <DataGridTextColumn Header="Название" Width="*" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Директор" Width="*" Binding="{Binding Director}"/>
-                <DataGridTextColumn Header="Почта" Width="*" Binding="{Binding Email}"/>
-                <DataGridTextColumn Header="Номер телефона" Width="*" Binding="{Binding Number}"/>
-                <DataGridTextColumn Header="Адрес" Width="*" Binding="{Binding Address}"/>
-                <DataGridTextColumn Header="ИНН" Width="*" Binding="{Binding INN}"/>
-                <DataGridTextColumn Header="Рейтинг" Width="*" Binding="{Binding Rating}"/>
+                <DataGridTextColumn Header="Продукция" Width="*" Binding="{Binding Product1.Name}"/>
+                <DataGridTextColumn Header="Партнер" Width="*" Binding="{Binding Partner1.Name}"/>
+                <DataGridTextColumn Header="Количество" Width="*" Binding="{Binding Quantity}"/>
+                <DataGridTextColumn Header="Дата продажи" Width="*" Binding="{Binding SaleDATE, StringFormat='dd.MM.yyyy'}"/>
 
                 <DataGridTemplateColumn Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="BtnEdit" Content="Редактировать" Width="100" Height="30" Click="BtnEdit_Click"/>
+                            <Button x:Name="BtnEdit" Content="Редактировать" Width="100" Height="30"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

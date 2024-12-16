@@ -20,9 +20,12 @@ namespace MasterFloorAPP.Pages
     /// </summary>
     public partial class Sales : Page
     {
+        private readonly Entities db;
         public Sales()
         {
             InitializeComponent();
+            db = new Entities();
+            DataGridSales.ItemsSource = db.Partner_products.ToList();
         }
     }
 }
