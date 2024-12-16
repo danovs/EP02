@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MasterFloorAPP"
         mc:Ignorable="d"
-        Title="Мастер пол" Height="800" Width="1280" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Мастер пол" Height="800" Width="1280" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -13,12 +13,14 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1"/>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Navigated="MainFrame_Navigated"/>
         <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
-            <Button x:Name="BtnPartners" Content="Партнеры" Grid.Row="2" Width="100" Height="30" FontSize="16" Click="BtnPartners_Click" Margin="0 0 10 0" />
-            <Button x:Name="BtnSales" Content="Продажи" Grid.Row="2" Width="100" Height="30" FontSize="16" Click="BtnSales_Click" Margin="0 0 10 0" />
-            <Button x:Name="BtnDiscounts" Content="Скдики" Grid.Row="2" Width="100" Height="30" FontSize="16" Click="BtnDiscounts_Click" />
+            <Button x:Name="BtnPartners" Content="Партнеры" Grid.Row="2" Width="100" Height="30" FontSize="16" Click="BtnPartners_Click" Margin="0 0 10 0" ToolTip="Нажав на кнопку, вы увидите список партнеров. Сможете добавлять, удалять, редактировать партнеров."/>
+            <Button x:Name="BtnSales" Content="Продажи" Grid.Row="2" Width="100" Height="30" FontSize="16" Click="BtnSales_Click" Margin="0 0 10 0" ToolTip="Нажав на кнопку, вы увидите список продаж. Партнеры, которым были проданы товары."/>
+            <Button x:Name="BtnDiscounts" Content="Скдики" Grid.Row="2" Width="100" Height="30" FontSize="16" Click="BtnDiscounts_Click" ToolTip="Нажав на кнопку, вы увидите партнеров, у которых есть скидки на покупку товара."/>
         </StackPanel>
+
+        <Button x:Name="BtnBack" Content="Назад" Grid.Row="0" Width="100" Height="30" HorizontalAlignment="Left" Margin="10 0 0 0" Click="BtnBack_Click"/>
 
     </Grid>
 </Window>

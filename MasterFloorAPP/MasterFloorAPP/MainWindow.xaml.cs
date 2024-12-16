@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -41,6 +42,46 @@ namespace MasterFloorAPP
         private void BtnDiscounts_Click(object sender, RoutedEventArgs e)
         {
             FrameManager.MainFrame.Navigate(new Discounts());
+        }
+
+        private void MainFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            if (!(e.Content is Page page)) return;
+            this.Title = $"Мастер пол - {page.Title}";
+
+            if (page is Pages.WelcomePage)
+            {
+                BtnBack.Visibility = Visibility.Hidden;
+            }
+            else { 
+                BtnBack.Visibility = Visibility.Visible; 
+            }
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainFrame.CanGoBack)
+            {
+                MainFrame.GoBack();
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var result = MessageBox.Show(
+                "Вы действительно хотите выйти из приложения?",
+                "Выход",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+                );
+            if (result == MessageBoxResult.Yes)
+            {
+                e.Cancel = false;
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

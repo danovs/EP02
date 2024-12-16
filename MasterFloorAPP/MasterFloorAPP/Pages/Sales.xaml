@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:MasterFloorAPP.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Sales">
+      Title="Продажи">
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -32,7 +32,5 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <!--<Button x:Name="BtnAdd" Content="Добавить" Grid.Row="1" Width="100" Height="30" HorizontalAlignment="Left" Margin="5" Click="BtnAdd_Click"/> -->
-        <!--<Button x:Name="BtnDel" Content="Удалить" Grid.Row="1" Width="100" Height="30" HorizontalAlignment="Right" Margin="5" Click="BtnDel_Click"/>-->
     </Grid>
 </Page>

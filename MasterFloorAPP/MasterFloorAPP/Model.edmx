@@ -22,6 +22,7 @@
           <Property Name="Partner" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" />
           <Property Name="SaleDATE" Type="date" />
+          <Property Name="Discount" Type="decimal" Precision="3" Scale="2" />
         </EntityType>
         <EntityType Name="Partner_type">
           <Key>
@@ -164,6 +165,7 @@
           <Property Name="Partner" Type="Int32" Nullable="false" />
           <Property Name="Quantity" Type="Int32" />
           <Property Name="SaleDATE" Type="DateTime" Precision="0" />
+          <Property Name="Discount" Type="Decimal" Precision="3" Scale="2" />
           <NavigationProperty Name="Partner1" Relationship="Self.FK__Partner_p__Partn__440B1D61" FromRole="Partner_products" ToRole="Partners" />
           <NavigationProperty Name="Product1" Relationship="Self.FK__Partner_p__Produ__4316F928" FromRole="Partner_products" ToRole="Products" />
         </EntityType>
@@ -315,6 +317,7 @@
                 <ScalarProperty Name="Partner" ColumnName="Partner" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="SaleDATE" ColumnName="SaleDATE" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

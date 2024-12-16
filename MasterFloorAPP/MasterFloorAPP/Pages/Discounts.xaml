@@ -6,44 +6,67 @@
       xmlns:local="clr-namespace:MasterFloorAPP.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Discounts">
+      Title="Скидки">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ListView Name="ListPartners" Grid.Row="1">
+
+        <ListView Name="ListUser" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"></RowDefinition>
-                            <RowDefinition Height="auto"></RowDefinition>
-                            <RowDefinition Height="auto"></RowDefinition>
-                            <RowDefinition Height="auto"></RowDefinition>
-                            <RowDefinition Height="auto"></RowDefinition>
-                            <RowDefinition Height="auto"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock VerticalAlignment="Center" TextAlignment="Left" Grid.Column="0" Text="Тест" FontSize="18" FontWeight="Bold" Margin="0,0,133,0"/>
-                        <TextBlock VerticalAlignment="Center" TextAlignment="Left" Width="180" Grid.Column="0" HorizontalAlignment="Left" FontSize="18" Text="Тест" Margin="48,0,0,0"/>
-                        <TextBlock VerticalAlignment="Center" TextAlignment="Left" Width="10" Grid.Column="0" HorizontalAlignment="Left" FontSize="18" Text="|" Margin="38,0,0,0"/>
-                        <TextBlock VerticalAlignment="Center" TextAlignment="Left" Width="370" Grid.Row="2" HorizontalAlignment="Left" FontSize="18" Text="Тест"/>
-                        <TextBlock VerticalAlignment="Center" TextAlignment="Left" Width="200" Grid.Row="3" HorizontalAlignment="Left" FontSize="18" Text="Тест"/>
-                        <TextBlock VerticalAlignment="Center" TextAlignment="Left" Width="200" Grid.Row="4" HorizontalAlignment="Left" FontSize="18" Text="10"/>
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-                        <TextBlock VerticalAlignment="Top" TextAlignment="Right" Width="200" Grid.Row="2" HorizontalAlignment="Left" FontSize="18" Text="10%" Margin="247,19,0,0" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-                    </Grid>
+                            <TextBlock VerticalAlignment="Center" TextAlignment="Left" Grid.Column="0" 
+                                   Text="{Binding Partner.Partner_type.Type}" FontSize="18" FontWeight="Bold" 
+                                   Margin="0,0,133,0" />
+
+                            <TextBlock VerticalAlignment="Center" TextAlignment="Left" Width="180" 
+                                   Grid.Column="0" HorizontalAlignment="Left" FontSize="18" 
+                                   Text="{Binding Partner.Name}" Margin="48,0,0,0" />
+
+                            <TextBlock VerticalAlignment="Center" TextAlignment="Left" Width="10" 
+                                   Grid.Column="0" HorizontalAlignment="Left" FontSize="18" 
+                                   Text="|" Margin="40,0,0,0"/>
+
+                            <TextBlock VerticalAlignment="Center" TextAlignment="Left" Width="370" 
+                                   Grid.Row="2" HorizontalAlignment="Left" FontSize="18" 
+                                   Text="{Binding Partner.Director}" />
+
+                            <TextBlock VerticalAlignment="Center" TextAlignment="Left" Width="200" 
+                                   Grid.Row="3" HorizontalAlignment="Left" FontSize="18" 
+                                   Text="{Binding Partner.Number}" />
+
+                            <TextBlock VerticalAlignment="Center" TextAlignment="Left" Width="200" 
+                                   Grid.Row="4" HorizontalAlignment="Left" FontSize="18" 
+                                   Text="{Binding Partner.Rating}" />
+
+                            <TextBlock VerticalAlignment="Center" TextAlignment="Right" Width="200" 
+                                   Grid.Row="2" Grid.Column="4" HorizontalAlignment="Right" FontSize="18" 
+                                   Text="{Binding Discount, StringFormat={}{0}%}" Margin="0,0,50,0" 
+                                   Grid.RowSpan="2" />
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
     </Grid>
 </Page>

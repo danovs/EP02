@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:MasterFloorAPP.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="WelcomePage">
+      Title="Начальная страница">
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -14,6 +14,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
+
         <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
                 <Image Width="200" Height="200" Source="/References/Images/MasterFloor.png" HorizontalAlignment="Center"/>
