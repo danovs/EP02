@@ -88,6 +88,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Sales.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Material_type.cs">
@@ -113,6 +117,9 @@
     </Compile>
     <Compile Include="Pages\Partners.xaml.cs">
       <DependentUpon>Partners.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Sales.xaml.cs">
+      <DependentUpon>Sales.xaml</DependentUpon>
     </Compile>
     <Compile Include="Partner.cs">
       <DependentUpon>Model.tt</DependentUpon>

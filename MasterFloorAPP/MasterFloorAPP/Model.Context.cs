@@ -15,17 +15,16 @@ namespace MasterFloorAPP
     
     public partial class Entities : DbContext
     {
-        private static Entities _context;
+        private static readonly Entities _context;
         public Entities()
             : base("name=Entities")
         {
         }
-
         public static Entities GetContext()
         {
-            if (_context == null)
+            if ( _context == null )
             {
-                _context = new Entities();
+                Entities _context = new Entities();
             }
             return _context;
         }

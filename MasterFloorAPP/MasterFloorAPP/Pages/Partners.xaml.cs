@@ -56,7 +56,12 @@ namespace MasterFloorAPP.Pages
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new AddPartner());
+            NavigationService?.Navigate(new AddPartner(null));
+        }
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Pages.AddPartner((sender as Button).DataContext as Partner));
         }
     }
 }

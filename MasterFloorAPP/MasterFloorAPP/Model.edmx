@@ -39,9 +39,9 @@
           <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="Director" Type="nvarchar" MaxLength="120" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="80" />
-          <Property Name="Number" Type="char" MaxLength="15" />
+          <Property Name="Number" Type="char" MaxLength="12" />
           <Property Name="Address" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="INN" Type="char" MaxLength="20" />
+          <Property Name="INN" Type="char" MaxLength="10" />
           <Property Name="Rating" Type="int" />
         </EntityType>
         <EntityType Name="Product_type">
@@ -184,9 +184,9 @@
           <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Director" Type="String" MaxLength="120" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
-          <Property Name="Number" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Number" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="INN" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="INN" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="Rating" Type="Int32" />
           <NavigationProperty Name="Partner_products" Relationship="Self.FK__Partner_p__Partn__440B1D61" FromRole="Partners" ToRole="Partner_products" />
           <NavigationProperty Name="Partner_type" Relationship="Self.FK__Partners__Type__403A8C7D" FromRole="Partners" ToRole="Partner_type" />

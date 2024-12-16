@@ -31,5 +31,10 @@ namespace MasterFloorAPP
         {
             FrameManager.MainFrame.Navigate(new Partners());
         }
+
+        private void BtnSales_Click(object sender, RoutedEventArgs e)
+        {
+            FrameManager.MainFrame.Navigate(new Sales());
+        }
     }
 }

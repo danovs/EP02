@@ -14,7 +14,10 @@
         </Grid.RowDefinitions>
 
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1"/>
-        <Button x:Name="BtnPartners" Content="Партнеры" Grid.Row="2" Width="100" Height="30" FontSize="16" Click="BtnPartners_Click" />
+        <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+            <Button x:Name="BtnPartners" Content="Партнеры" Grid.Row="2" Width="100" Height="30" FontSize="16" Click="BtnPartners_Click" Margin="0 0 10 0" />
+            <Button x:Name="BtnSales" Content="Продажи" Grid.Row="2" Width="100" Height="30" FontSize="16" Click="BtnSales_Click" />
+        </StackPanel>
 
     </Grid>
 </Window>

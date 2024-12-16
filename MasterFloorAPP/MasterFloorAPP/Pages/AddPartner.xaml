@@ -36,7 +36,7 @@
             <TextBox x:Name="AddressOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10"/>
 
             <TextBlock Text="ИНН" FontSize="16" Margin="0 0 0 10"/>
-            <TextBox x:Name="INNOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10" MaxLength="20"/>
+            <TextBox x:Name="INNOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10" MaxLength="10"/>
 
             <TextBlock Text="Рейтинг" FontSize="16" Margin="0 0 0 10"/>
             <TextBox x:Name="RatingOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10"/>
