@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MasterFloorAPP.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace MasterFloorAPP
         public MainWindow()
         {
             InitializeComponent();
+            FrameManager.MainFrame = MainFrame;
+        }
+
+        private void BtnPartners_Click(object sender, RoutedEventArgs e)
+        {
+            FrameManager.MainFrame.Navigate(new Partners());
         }
     }
 }
