@@ -66,8 +66,8 @@
 
         <!-- Нижние кнопки -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2" Margin="0, 30, 0 0">
-            <Button x:Name="BtnSave" Content="Сохранить" Width="100" Height="30" FontSize="16" Margin="0 0 10 10" Click="BtnSave_Click" ToolTip="Нажав на кнопку, вы обновите / добавите партнера."/>
-            <Button x:Name="BtnBack" Content="Назад" Width="100" Height="30" FontSize="16" Margin="0 0 0 10" Click="BtnBack_Click" ToolTip="Нажав на кнопку назад, вы вернетесь на предыдущую страницу."/>
+            <Button x:Name="BtnSave" Content="Сохранить" Width="100" Height="30" FontSize="16" Margin="0 0 10 10" Click="BtnSave_Click" ToolTip="Нажав на кнопку, вы обновите / добавите партнера." Style="{StaticResource Button}"/>
+            <Button x:Name="BtnBack" Content="Назад" Width="100" Height="30" FontSize="16" Margin="0 0 0 10" Click="BtnBack_Click" ToolTip="Нажав на кнопку назад, вы вернетесь на предыдущую страницу." Style="{StaticResource Button}"/>
         </StackPanel>
     </Grid>
 </Page>

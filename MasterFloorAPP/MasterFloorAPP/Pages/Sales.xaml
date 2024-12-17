@@ -20,15 +20,6 @@
                 <DataGridTextColumn Header="Партнер" Width="*" Binding="{Binding Partner1.Name}"/>
                 <DataGridTextColumn Header="Количество" Width="*" Binding="{Binding Quantity}"/>
                 <DataGridTextColumn Header="Дата продажи" Width="*" Binding="{Binding SaleDATE, StringFormat='dd.MM.yyyy'}"/>
-
-                <DataGridTemplateColumn Width="100">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button x:Name="BtnEdit" Content="Редактировать" Width="100" Height="30"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
             </DataGrid.Columns>
         </DataGrid>
 

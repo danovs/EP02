@@ -68,7 +68,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button x:Name="BtnAdd" Content="Добавить партнера" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Width="120" Height="30" Margin="0 0 10 0" Click="BtnAdd_Click"/>
-        <Button x:Name="BtnShowSales" Content="Посмотреть продажи" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Height="30" Margin="0 0 10 0" Click="BtnShowSales_Click"/>
+        <Button x:Name="BtnAdd" Content="Добавить партнера" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0" Click="BtnAdd_Click" Style="{StaticResource Button}"/>
+        <Button x:Name="BtnShowSales" Content="Посмотреть продажи" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0" Click="BtnShowSales_Click" Style="{StaticResource Button}"/>
     </Grid>
 </Page>

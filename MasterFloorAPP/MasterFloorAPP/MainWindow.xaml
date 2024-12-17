@@ -16,7 +16,7 @@
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Navigated="MainFrame_Navigated"/>
         <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center"/>
 
-        <Button x:Name="BtnBack" Content="Назад" Grid.Row="0" Width="100" Height="30" HorizontalAlignment="Left" Margin="10 0 0 0" Click="BtnBack_Click"/>
+        <Button x:Name="BtnBack" Content="Назад" Grid.Row="0" Width="100" Height="30" HorizontalAlignment="Left" Margin="10 0 0 0" Click="BtnBack_Click" Style="{StaticResource Button}"/>
 
     </Grid>
 </Window>
