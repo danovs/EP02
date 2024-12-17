@@ -1,8 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Navigation;
 
 namespace MasterFloorAPP.Pages
@@ -13,6 +15,7 @@ namespace MasterFloorAPP.Pages
         private static readonly Regex FIOregex = new Regex(@"^[А-ЯЁ][а-яё]+$"); // Для ФИО директора
         private static readonly Regex EmailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$"); // Для электронной почты
         private static readonly Regex INNRegex = new Regex(@"^\d{10}$"); // Для ИНН (10 цифр)
+        private static readonly Regex QuantityRegex = new Regex(@"^\d+$");
         private static readonly Regex PhoneNumberRegex = new Regex(@"^\+?[1-9]\d{9,14}$"); // Для номера телефона с международным кодом
 
         private readonly Entities db; // Контекст базы данных
@@ -23,6 +26,8 @@ namespace MasterFloorAPP.Pages
             InitializeComponent();
             db = new Entities(); // Инициализация контекста базы данных
             LoadTypes(); // Загрузка типов партнеров в комбобокс
+            LoadProducts();
+            LoadProductTypes();
             currentPartner = selectedPartner; // Если передан партнер, значит редактируем его
 
             // Если текущий партнер не null, заполняем поля данными партнера
@@ -40,6 +45,27 @@ namespace MasterFloorAPP.Pages
                 {
                     Type.SelectedValue = currentPartner.Type; // Выбираем тип партнера
                 }
+
+                var partnerProduct = db.Partner_products
+                               .FirstOrDefault(pp => pp.Partner == currentPartner.ID);
+
+                if (partnerProduct != null)
+                {
+                    // Выбираем соответствующий товар и тип товара, если такой есть
+                    TovariOrg.SelectedValue = partnerProduct.Product;
+                    QuantityOrg.Text = partnerProduct.Quantity.ToString();
+
+                    // Найдем тип товара и установим его в комбобокс
+                    var product = db.Products.FirstOrDefault(p => p.ID == partnerProduct.Product);
+                    if (product != null)
+                    {
+                        var productType = db.Product_type.FirstOrDefault(pt => pt.ID == product.Type);
+                        if (productType != null)
+                        {
+                            TovariTypes.SelectedValue = productType.ID; // Устанавливаем тип товара
+                        }
+                    }
+                }
             }
         }
 
@@ -52,124 +78,170 @@ namespace MasterFloorAPP.Pages
             Type.SelectedValuePath = "ID"; // ID будет значением, которое хранится в базе
         }
 
+        private void LoadProducts()
+        {
+            var products = db.Products.ToList();
+            TovariOrg.ItemsSource = products;
+            TovariOrg.DisplayMemberPath = "Name";
+            TovariOrg.SelectedValuePath = "ID";
+        }
+
+        private void LoadProductTypes()
+        {
+            var productTypes = db.Product_type.ToList();
+            TovariTypes.ItemsSource = productTypes;
+            TovariTypes.DisplayMemberPath = "Type";
+            TovariTypes.SelectedValuePath= "ID";
+        }
+
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            // Считываем данные с формы
-            string Name = NameOrg.Text;
-            string Director = DirectorOrg.Text;
-            string Email = EmailOrg.Text;
-            string Number = NumberOrg.Text;
-            string INN = INNOrg.Text;
-            string Rating = RatingOrg.Text;
-            string Address = AddressOrg.Text;
+            // Организация
+            string NameOrganization = NameOrg.Text;
+            string DirectorOrganization = DirectorOrg.Text;
+            string EmailOrganization = EmailOrg.Text;
+            string NumberOrganization = NumberOrg.Text;
+            string INNOrganization = INNOrg.Text;
+            string RatingOrganization = RatingOrg.Text;
+            string AddressOrganization = AddressOrg.Text;
+
+            int? selectedType = (int?)Type.SelectedValue;
+
+            // Товар
+            string Quantity = QuantityOrg.Text;
+            int? selectedProductTypeID = (int?)TovariTypes.SelectedValue;
+            int? selectedProductID = (int?)TovariOrg.SelectedValue;
 
             try
             {
-                // Проверка корректности данных
-                if (!FIOValidation(Director))
+                // Валидация данных
+                if (!FIOValidation(DirectorOrganization))
                 {
-                    MessageBox.Show(
-                        "ФИО директора введено неверно. Убедитесь, что оно состоит из 2-5 частей (имя, фамилия, и возможно отчество), каждая из которых начинается с заглавной буквы и не превышает 50 символов.",
-                        "Ошибка: Некорректное ФИО",
-                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("ФИО директора введено неверно.", "Ошибка: Некорректное ФИО", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
-                if (!PhoneNumberRegex.IsMatch(Number))
+                if (!PhoneNumberRegex.IsMatch(NumberOrganization))
                 {
-                    MessageBox.Show(
-                        "Номер телефона введён в неверном формате. Убедитесь, что он начинается с международного кода (например, +7) и содержит от 10 до 15 цифр без пробелов и символов.",
-                        "Ошибка: Некорректный номер телефона",
-                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Номер телефона введён в неверном формате.", "Ошибка: Некорректный номер телефона", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
-                if (!EmailRegex.IsMatch(Email))
+                if (!EmailRegex.IsMatch(EmailOrganization))
                 {
-                    MessageBox.Show(
-                        "Электронная почта введена неверно. Убедитесь, что почта содержит '@' и доменное имя (например, example@domain.com).",
-                        "Ошибка: Некорректная электронная почта",
-                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Электронная почта введена неверно.", "Ошибка: Некорректная электронная почта", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
-                if (!INNRegex.IsMatch(INN))
+                if (!INNRegex.IsMatch(INNOrganization))
                 {
-                    MessageBox.Show(
-                        "ИНН введён неверно. Он должен состоять из ровно 10 цифр. Проверьте и попробуйте снова.",
-                        "Ошибка: Некорректный ИНН",
-                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("ИНН введён неверно.", "Ошибка: Некорректный ИНН", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
-                if (!int.TryParse(Rating, out int ratingValue) || ratingValue < 1 || ratingValue > 10)
+                if (!int.TryParse(RatingOrganization, out int ratingValue) || ratingValue < 1 || ratingValue > 10)
                 {
-                    MessageBox.Show(
-                        "Рейтинг должен быть числом в диапазоне от 1 до 10. Введите корректное значение.",
-                        "Ошибка: Некорректный рейтинг",
-                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Рейтинг должен быть числом от 1 до 10.", "Ошибка: Некорректный рейтинг", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
-                // Если партнер редактируется (не null)
-                if (currentPartner != null)
+                if (!QuantityRegex.IsMatch(Quantity))
                 {
-                    var partnerToUpdate = db.Partners.FirstOrDefault(x => x.ID == currentPartner.ID);
-                    var selectedTypeID = (int)Type.SelectedValue; // ID выбранного типа партнера
+                    MessageBox.Show("Количество должно быть числом.", "Ошибка: Некорректное количество", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
 
-                    if (partnerToUpdate != null)
+                if (currentPartner != null)  // Если редактируем существующего партнера
+                {
+                    // Обновление данных партнера
+                    currentPartner.Name = NameOrganization;
+                    currentPartner.Director = DirectorOrganization;
+                    currentPartner.Email = EmailOrganization;
+                    currentPartner.Number = NumberOrganization;
+                    currentPartner.INN = INNOrganization;
+                    currentPartner.Address = AddressOrganization;
+                    currentPartner.Rating = ratingValue;
+                    currentPartner.Type = (int)selectedType;
+
+                    db.SaveChanges();  // Сохраняем изменения в базе данных
+
+                    int partnerId = currentPartner.ID;
+
+                    // Обновляем или добавляем запись о товаре партнера
+                    var partnerProduct = db.Partner_products
+                                           .FirstOrDefault(pp => pp.Partner == partnerId);
+
+                    if (partnerProduct != null)
                     {
-                        // Обновляем данные партнера
-                        partnerToUpdate.Type = selectedTypeID;
-                        partnerToUpdate.Name = Name;
-                        partnerToUpdate.Email = Email;
-                        partnerToUpdate.Number = Number;
-                        partnerToUpdate.Address = Address;
-                        partnerToUpdate.Director = Director;
-                        partnerToUpdate.INN = INN;
-                        partnerToUpdate.Rating = ratingValue;
-
-                        db.SaveChanges(); // Сохраняем изменения в базе
-                        MessageBox.Show("Данные партнера были изменены", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                        ClearFields(); // Очищаем форму
-                        NavigationService?.Navigate(new Partners()); // Навигация на страницу партнеров
+                        partnerProduct.Product = selectedProductID ?? partnerProduct.Product;
+                        partnerProduct.Quantity = int.TryParse(Quantity, out int quantityValue) ? quantityValue : partnerProduct.Quantity;
                     }
-                    else
+                    else if (selectedProductID.HasValue && int.TryParse(Quantity, out int quantityValue))
                     {
-                        MessageBox.Show("Партнер не найден в системе.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        partnerProduct = new Partner_products
+                        {
+                            Partner = partnerId,
+                            Product = selectedProductID.Value,
+                            Quantity = quantityValue,
+                            SaleDATE = DateTime.Now
+                        };
+
+                        db.Partner_products.Add(partnerProduct);
                     }
+
+                    db.SaveChanges();  // Сохраняем изменения в базе данных
+
+                    MessageBox.Show("Данные партнера обновлены.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                else
+                else  // Если создаем нового партнера
                 {
-                    // Если партнер новый, создаем его
-                    var selectedTypeID = (int)Type.SelectedValue;
                     var newPartner = new Partner
                     {
-                        Type = selectedTypeID,
-                        Name = Name,
-                        Director = Director,
-                        Email = Email,
-                        Number = Number,
-                        Address = Address,
-                        INN = INN,
+                        Type = (int)selectedType,
+                        Name = NameOrganization,
+                        Director = DirectorOrganization,
+                        Email = EmailOrganization,
+                        Number = NumberOrganization,
+                        INN = INNOrganization,
+                        Address = AddressOrganization,
                         Rating = ratingValue
                     };
 
-                    db.Partners.Add(newPartner); // Добавляем нового партнера в базу
-                    db.SaveChanges();
-                    MessageBox.Show("Партнер был добавлен в систему");
-                    ClearFields(); // Очищаем поля
-                    NavigationService?.Navigate(new Partners()); // Перенаправляем на страницу партнеров
+                    db.Partners.Add(newPartner);
+                    db.SaveChanges();  // Сохраняем нового партнера в базе данных
+
+                    int partnerId = newPartner.ID;
+
+                    if (int.TryParse(Quantity, out int quantityValue) && selectedProductID.HasValue)
+                    {
+                        var partnerProduct = new Partner_products
+                        {
+                            Partner = partnerId,
+                            Product = selectedProductID.Value,
+                            Quantity = quantityValue,
+                            SaleDATE = DateTime.Now
+                        };
+
+                        db.Partner_products.Add(partnerProduct);
+                        db.SaveChanges();  // Сохраняем запись о продукции в базе данных
+
+                        MessageBox.Show("Партнер и продукция были добавлены.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Некорректное количество или продукт не выбран.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
                 }
+
+                NavigationService?.Navigate(new Discounts());  // Переход на страницу скидок
+                ClearFields();  // Очищаем форму
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    $"Возникла ошибка при сохранении данных партнёра. Убедитесь, что все поля заполнены корректно.\nОшибка: {ex.Message}",
-                    "Критическая ошибка",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message);  // Показываем сообщение об ошибке
             }
         }
+
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
@@ -210,6 +282,9 @@ namespace MasterFloorAPP.Pages
             INNOrg.Text = string.Empty;
             RatingOrg.Text = string.Empty;
             EmailOrg.Text = string.Empty;
+            TovariTypes.SelectedItem = null;
+            TovariOrg.SelectedItem = null;
+            QuantityOrg.Text = string.Empty;
         }
     }
 }

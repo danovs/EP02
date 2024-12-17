@@ -15,34 +15,56 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Center" Width="400">
-            
-            <TextBlock Text="Тип организации" FontSize="16" Margin="0 0 0 10"/>
-            <ComboBox x:Name="Type" Height="30" FontSize="16" VerticalContentAlignment="Center" Margin=" 0 0 0 10"></ComboBox>
+        <!-- Основное содержимое в центральной части -->
+        <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="600">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Название организации" FontSize="16" Margin="0 0 0 10"/>
-            <TextBox x:Name="NameOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10"/>
+            <!-- Первая колонка -->
+            <StackPanel Grid.Column="0" Margin="10">
+                <TextBlock Text="Тип организации" FontSize="16" Margin="0 0 0 10"/>
+                <ComboBox x:Name="Type" Height="30" FontSize="16" VerticalContentAlignment="Center" Margin=" 0 0 0 10"></ComboBox>
 
-            <TextBlock Text="Директор" FontSize="16" Margin="0 0 0 10"/>
-            <TextBox x:Name="DirectorOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10"/>
+                <TextBlock Text="Название организации" FontSize="16" Margin="0 0 0 10"/>
+                <TextBox x:Name="NameOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10"/>
 
-            <TextBlock Text="Почта организации" FontSize="16" Margin="0 0 0 10"/>
-            <TextBox x:Name="EmailOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10"/>
+                <TextBlock Text="Директор" FontSize="16" Margin="0 0 0 10"/>
+                <TextBox x:Name="DirectorOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10"/>
 
-            <TextBlock Text="Номер телефона" FontSize="16" Margin="0 0 0 10"/>
-            <TextBox x:Name="NumberOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10"/>
+                <TextBlock Text="Почта организации" FontSize="16" Margin="0 0 0 10"/>
+                <TextBox x:Name="EmailOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10"/>
 
-            <TextBlock Text="Адрес" FontSize="16" Margin="0 0 0 10"/>
-            <TextBox x:Name="AddressOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10"/>
+                <TextBlock Text="Номер телефона" FontSize="16" Margin="0 0 0 10"/>
+                <TextBox x:Name="NumberOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10"/>
+            </StackPanel>
 
-            <TextBlock Text="ИНН" FontSize="16" Margin="0 0 0 10"/>
-            <TextBox x:Name="INNOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10" MaxLength="10"/>
+            <!-- Вторая колонка -->
+            <StackPanel Grid.Column="1" Margin="10">
+                <TextBlock Text="Адрес" FontSize="16" Margin="0 0 0 10"/>
+                <TextBox x:Name="AddressOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10"/>
 
-            <TextBlock Text="Рейтинг" FontSize="16" Margin="0 0 0 10"/>
-            <TextBox x:Name="RatingOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10"/>
+                <TextBlock Text="ИНН" FontSize="16" Margin="0 0 0 10"/>
+                <TextBox x:Name="INNOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10" MaxLength="10"/>
 
-        </StackPanel>
+                <TextBlock Text="Рейтинг" FontSize="16" Margin="0 0 0 10"/>
+                <TextBox x:Name="RatingOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10"/>
 
+                <TextBlock Text="Тип продукции" FontSize="16" Margin="0 0 0 10"/>
+                <ComboBox x:Name="TovariTypes" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10"/>
+                
+                <TextBlock Text="Продукция" FontSize="16" Margin="0 0 0 10"/>
+                <ComboBox x:Name="TovariOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10"/>
+                
+
+
+                <TextBlock Text="Количество проданного товара" FontSize="16" Margin="0 0 0 10"/>
+                <TextBox x:Name="QuantityOrg" Height="30" VerticalContentAlignment="Center" Margin="0 0 0 10"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Нижние кнопки -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2" Margin="0, 30, 0 0">
             <Button x:Name="BtnSave" Content="Сохранить" Width="100" Height="30" FontSize="16" Margin="0 0 10 10" Click="BtnSave_Click" ToolTip="Нажав на кнопку, вы обновите / добавите партнера."/>
             <Button x:Name="BtnBack" Content="Назад" Width="100" Height="30" FontSize="16" Margin="0 0 0 10" Click="BtnBack_Click" ToolTip="Нажав на кнопку назад, вы вернетесь на предыдущую страницу."/>

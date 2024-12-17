@@ -6,11 +6,14 @@ namespace MasterFloorAPP.Pages
     public partial class Sales : Page
     {
         private readonly Entities db;
-        public Sales()
+        public Sales(int partnerID)
         {
             InitializeComponent();
             db = new Entities();
-            DataGridSales.ItemsSource = db.Partner_products.ToList();
+            
+            var partnerSales = db.Partner_products.Where(p => p.Partner == partnerID).ToList();
+
+            DataGridSales.ItemsSource = partnerSales;
         }
     }
 }

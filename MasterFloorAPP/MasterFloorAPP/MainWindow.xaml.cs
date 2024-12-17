@@ -26,22 +26,7 @@ namespace MasterFloorAPP
         {
             InitializeComponent();
             FrameManager.MainFrame = MainFrame;
-            MainFrame.Navigate(new WelcomePage());
-        }
-
-        private void BtnPartners_Click(object sender, RoutedEventArgs e)
-        {
-            FrameManager.MainFrame.Navigate(new Partners());
-        }
-
-        private void BtnSales_Click(object sender, RoutedEventArgs e)
-        {
-            FrameManager.MainFrame.Navigate(new Sales());
-        }
-
-        private void BtnDiscounts_Click(object sender, RoutedEventArgs e)
-        {
-            FrameManager.MainFrame.Navigate(new Discounts());
+            MainFrame.Navigate(new Discounts());
         }
 
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)
@@ -49,7 +34,7 @@ namespace MasterFloorAPP
             if (!(e.Content is Page page)) return;
             this.Title = $"Мастер пол - {page.Title}";
 
-            if (page is Pages.WelcomePage)
+            if (page is Pages.Discounts)
             {
                 BtnBack.Visibility = Visibility.Hidden;
             }

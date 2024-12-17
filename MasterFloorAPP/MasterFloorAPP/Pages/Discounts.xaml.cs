@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace MasterFloorAPP.Pages
@@ -52,6 +53,41 @@ namespace MasterFloorAPP.Pages
                 return 10; // Если общее количество товаров от 50001 до 300000, скидка 10%
             else
                 return 15; // Если общее количество товаров больше 300000, скидка 15%
+        }
+
+        private void BtnAdd_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new AddPartner(null));
+        }
+
+        private void BtnShowSales_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (ListUser.SelectedItem != null) // Проверяем, что элемент выбран
+            {
+                // Получаем выбранного партнера
+                var selectedPartner = (dynamic)ListUser.SelectedItem;
+                int partnerId = selectedPartner.Partner.ID;
+
+                // Переход на страницу Sales с передачей ID партнёра
+                NavigationService?.Navigate(new Sales(partnerId));
+            }
+            else
+            {
+                // Выводим сообщение, если элемент не выбран
+                MessageBox.Show("Пожалуйста, выберите партнёра из списка.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void ListUser_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ListUser.SelectedItem != null)
+            {
+                var selectedPartner = (dynamic)ListUser.SelectedItem;
+                var partner = selectedPartner.Partner;
+
+                // Переход на страницу AddPartner с передачей выбранного партнера
+                NavigationService?.Navigate(new AddPartner(partner));
+            }
         }
     }
 }

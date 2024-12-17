@@ -88,15 +88,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Partners.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\Sales.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\WelcomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,14 +118,8 @@
     <Compile Include="Pages\Discounts.xaml.cs">
       <DependentUpon>Discounts.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Partners.xaml.cs">
-      <DependentUpon>Partners.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Sales.xaml.cs">
       <DependentUpon>Sales.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\WelcomePage.xaml.cs">
-      <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Partner.cs">
       <DependentUpon>Model.tt</DependentUpon>

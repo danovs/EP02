@@ -12,9 +12,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-
-        <ListView Name="ListUser" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+        <ListView Name="ListUser" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"  SelectionChanged="ListUser_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Black" BorderThickness="1" Margin="10">
@@ -68,5 +68,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button x:Name="BtnAdd" Content="Добавить партнера" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Width="120" Height="30" Margin="0 0 10 0" Click="BtnAdd_Click"/>
+        <Button x:Name="BtnShowSales" Content="Посмотреть продажи" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Height="30" Margin="0 0 10 0" Click="BtnShowSales_Click"/>
     </Grid>
 </Page>
